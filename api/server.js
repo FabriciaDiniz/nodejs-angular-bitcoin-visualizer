@@ -1,4 +1,4 @@
-require('dotenv/config');
+require('dotenv-safe').config();
 
 const app = require('./src/app')
 
