@@ -1,4 +1,7 @@
-#Env
+# Db File
+**/db.json
+
+# Env
 **/.env
 
 # Node
