@@ -8,7 +8,7 @@ function saveToken(token) {
 }
 
 exports.login = async (req, res) => {
-	const token = crypto.randomBytes(16).toString('hex');
+	const token = crypto.randomBytes(8).toString('hex');
 	saveToken(token);
 	res.send({ token: token });
 }
