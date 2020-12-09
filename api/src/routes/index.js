@@ -8,6 +8,6 @@ router.post('/api/login', validationMiddleware.login, userController.login);
 
 router.get('/api/crypto/btc', quotationController.getQuotation);
 
-router.post('/api/crypto/btc', quotationController.updateRates);
+router.post('/api/crypto/btc', [validationMiddleware.checkToken, validationMiddleware.checkParams], quotationController.updateRates);
 
 module.exports = router;

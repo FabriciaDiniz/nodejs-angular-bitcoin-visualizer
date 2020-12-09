@@ -58,18 +58,23 @@ const getQuotation = async (req, res) => {
 }
 
 const updateRates = (req, res) => {
+
+	if (res.finished) return;
+
 	const fileContent = fs.readFileSync(currenciesJsonPath);
 	const content = JSON.parse(fileContent);
-	console.log(content);
 
 	content[req.body.currency] = req.body.value;
 
 	fs.writeFile(currenciesJsonPath, JSON.stringify(content), (err, data) => {
 		if (err) {
-			console.log(err);
-			res.status(400).send({'message': `Não foi possível alterar o valor de ${req.body.currency}`});
+			res.status(400).send({
+				'message': `Não foi possível alterar o valor de ${req.body.currency}`
+			});
 		} else {
-			res.status(200).end();
+			res.status(200).send({
+				"message": "Valor alterado com sucesso!"
+			});
 		}
 	});
 }
