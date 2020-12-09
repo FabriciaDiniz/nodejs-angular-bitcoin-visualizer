@@ -5,7 +5,7 @@ const adapter = new FileSync('db.json');
 const db = lowdb(adapter);
 
 db.defaults({
-	validTokens: []
+  validTokens: [],
 }).write();
 
 module.exports = db;
