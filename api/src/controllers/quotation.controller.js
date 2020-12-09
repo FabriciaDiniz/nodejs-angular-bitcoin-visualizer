@@ -1,6 +1,7 @@
 const axios = require('axios');
 const fs = require('fs');
 const coinDeskApi = 'https://api.coindesk.com/v1/bpi/currentprice/BTC.json';
+const currenciesJsonPath = 'src/data/currencies.json';
 
 const currencies = {
 	'BRL': 'Brazilian Real',
@@ -13,7 +14,7 @@ function calculateRate(USDRate, currencyRate) {
 }
 
 function createObj(USDObj, callback) {
-	fs.readFile('src/data/currencies.json', (err, data) => {
+	fs.readFile(currenciesJsonPath, (err, data) => {
 		const dataObj = JSON.parse(data);
 
 		let currenciesObj = {};
@@ -34,7 +35,7 @@ function createObj(USDObj, callback) {
 	});
 }
 
-exports.getQuotation = async (req, res) => {
+const getQuotation = async (req, res) => {
 	let coinDeskResponse = {};
 
 	await axios.get(coinDeskApi)
@@ -54,4 +55,26 @@ exports.getQuotation = async (req, res) => {
 		
 		res.status(200).send(coinDeskResponse);
 	});	
+}
+
+const updateRates = (req, res) => {
+	const fileContent = fs.readFileSync(currenciesJsonPath);
+	const content = JSON.parse(fileContent);
+	console.log(content);
+
+	content[req.body.currency] = req.body.value;
+
+	fs.writeFile(currenciesJsonPath, JSON.stringify(content), (err, data) => {
+		if (err) {
+			console.log(err);
+			res.status(400).send({'message': `Não foi possível alterar o valor de ${req.body.currency}`});
+		} else {
+			res.status(200).end();
+		}
+	});
+}
+
+module.exports = {
+	getQuotation,
+	updateRates,
 }

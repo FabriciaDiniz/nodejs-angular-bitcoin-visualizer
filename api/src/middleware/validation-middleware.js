@@ -1,3 +1,4 @@
+const db = require('../helpers/lowdb');
 const validator = require('../helpers/validate');
 
 const login = (req, res, next) => {
@@ -19,6 +20,13 @@ const login = (req, res, next) => {
     });
 }
 
+const checkToken = (req, res, next) => {
+
+    next();
+    
+}
+
 module.exports = { 
-  login
+    login,
+    checkToken
 }

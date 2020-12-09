@@ -6,6 +6,8 @@ const validationMiddleware = require('../middleware/validation-middleware');
 
 router.post('/api/login', validationMiddleware.login, userController.login);
 
-router.get('/api/cryto/btc', quotationController.getQuotation);
+router.get('/api/crypto/btc', quotationController.getQuotation);
+
+router.post('/api/crypto/btc', quotationController.updateRates);
 
 module.exports = router;
