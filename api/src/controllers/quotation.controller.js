@@ -74,7 +74,7 @@ const updateRates = (req, res) => {
 
   const fileContent = getFileContent(currenciesJsonPath);
 
-  fileContent[req.body.currency] = req.body.value;
+  fileContent[req.body.currency] = parseFloat(req.body.value).toString();
 
   fs.writeFile(currenciesJsonPath, JSON.stringify(fileContent), (err, data) => {
     if (err) {
