@@ -13,6 +13,7 @@ import { UpdateCurrencyComponent } from './components/update-currency/update-cur
 import { UpdateCurrencyService } from './components/update-currency/update-currency.service';
 import { RouterService } from './services/router.service';
 import { LoginService } from './components/login/login.service';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { LoginService } from './components/login/login.service';
     HomeComponent,
     LoginComponent,
     UpdateCurrencyComponent,
-    CurrencyDisplayComponent
+    CurrencyDisplayComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,

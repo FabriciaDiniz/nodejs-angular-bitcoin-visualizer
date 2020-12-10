@@ -3,12 +3,14 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { UpdateCurrencyComponent } from './components/update-currency/update-currency.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'atualizar', component: UpdateCurrencyComponent},
   {path: '', component: HomeComponent},
+  {path: '**', component: PageNotFoundComponent},
 ];
 
 @NgModule({
