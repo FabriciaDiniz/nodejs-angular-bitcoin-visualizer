@@ -4,7 +4,7 @@ import { LoginService } from '../login/login.service';
 import { Currencies } from '../../models/currencies.model';
 import { RouterService } from '../../services/router.service';
 import { UpdateCurrencyService } from './update-currency.service';
-import { FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-update-currency',
@@ -30,15 +30,18 @@ export class UpdateCurrencyComponent implements OnInit {
   ngOnInit(): void {
     this.updateForm = new FormGroup({
       currency: new FormControl('BRL'),
-      updatedValue: new FormControl()
+      updatedValue: new FormControl(1, [
+        Validators.required,
+        Validators.min(0.1),
+      ])
     });
   }
 
   public updateCurrency(): void {
 
     const token = this.loginService.getUserToken();
-    const currency = this.updateForm.get('currency').value;
-    const value = this.updateForm.get('updatedValue').value;
+    const currency = this.currency.value;
+    const value = this.updatedValue.value;
 
     if (token) {
       this.updateCurrencyService.updateCurrency(token, {
@@ -56,11 +59,11 @@ export class UpdateCurrencyComponent implements OnInit {
     this.routerService.redirectToHome();
   }
 
-  public getFormCurrencyValue(): string {
-    return this.updateForm.get('currency').value;
+  get currency(): AbstractControl {
+    return this.updateForm.get('currency');
   }
 
-  public getFormUpdatedValueValue(): string {
-    return this.updateForm.get('updatedValue').value;
+  get updatedValue(): AbstractControl {
+    return this.updateForm.get('updatedValue');
   }
 }

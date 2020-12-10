@@ -10,7 +10,7 @@
 		>
 			<label for="currency">Moeda</label>
 			<select
-				name="currency"
+				id="currency"
 				formControlName="currency"
 				class="form-item__width"
 			>
@@ -18,13 +18,27 @@
 				<option value="CAD">CAD</option>
 				<option value="EUR">EUR</option>
 			</select>
-			<div *ngIf="currentValues">
+			<div *ngIf="currentValues" class="pt-2">
 				<strong>Valor atual: </strong>
-				{{ currentValues[getFormCurrencyValue()] | currency: getFormCurrencyValue() }}
+				{{ currentValues[currency.value] | currency: currency.value }}
 			</div>
-			<label for="value">Novo valor</label>
-			<input formControlName="updatedValue" name="value" type="number" class="form-item__width">
-			<button	type="submit" class="form-item__width">
+			<label for="updatedValue">Novo valor</label>
+			<input
+				id="updatedValue"
+				type="number"
+				class="form-item__width"
+				formControlName="updatedValue"
+				required
+			>
+			<div *ngIf="updatedValue.invalid" class="alert alert-danger my-3">
+				<div *ngIf="updatedValue.errors.required">
+					Novo valor é obrigatório.
+				</div>
+				<div *ngIf="updatedValue.errors.min">
+					Novo valor deve ser no mínimo 0,1.
+				</div>
+			</div>
+			<button	type="submit" class="form-item__width mt-3" [disabled]="updatedValue.invalid">
 				ATUALIZAR
 			</button>
 		</form>
