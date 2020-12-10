@@ -1,30 +1,39 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
-import { UpdateCurrencyFormComponent } from './update-currency-form/update-currency-form.component';
 import { CurrencyDisplayComponent } from './currency-display/currency-display.component';
 import { HomeService } from './home/home.service';
-import { HttpClientModule } from '@angular/common/http';
+import { UpdateCurrencyComponent } from './update-currency/update-currency.component';
+import { UpdateCurrencyService } from './update-currency/update-currency.service';
+import { RouterService } from './services/router.service';
+import { LoginService } from './login/login.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LoginComponent,
-    UpdateCurrencyFormComponent,
+    UpdateCurrencyComponent,
     CurrencyDisplayComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [
+    RouterService,
+    LoginService,
     HomeService,
+    UpdateCurrencyService,
   ],
   bootstrap: [AppComponent]
 })

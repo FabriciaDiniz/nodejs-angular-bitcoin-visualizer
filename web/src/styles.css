@@ -14,3 +14,7 @@ button {
 	min-width: 70px;
 	padding: 5px;
 }
+
+label {
+	padding-top: 5px;
+}

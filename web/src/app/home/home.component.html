@@ -1,7 +1,7 @@
 <div *ngIf="rates">
   <div class="d-flex flex-column align-items-center">
     <div class="pb-3">
-      <button class="px-4">Atualizar valor monetário</button>
+      <button class="px-4" (click)="redirectToForm()">Atualizar valor monetário</button>
     </div>
     <app-currency-display currency="BCT" value=1></app-currency-display>
     <div class="d-flex flex-row">

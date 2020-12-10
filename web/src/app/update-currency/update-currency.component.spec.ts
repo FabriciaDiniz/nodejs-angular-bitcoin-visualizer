@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UpdateCurrencyFormComponent } from './update-currency-form.component';
+import { UpdateCurrencyComponent } from './update-currency.component';
 
 describe('UpdateCurrencyFormComponent', () => {
-  let component: UpdateCurrencyFormComponent;
-  let fixture: ComponentFixture<UpdateCurrencyFormComponent>;
+  let component: UpdateCurrencyComponent;
+  let fixture: ComponentFixture<UpdateCurrencyComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UpdateCurrencyFormComponent ]
+      declarations: [ UpdateCurrencyComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UpdateCurrencyFormComponent);
+    fixture = TestBed.createComponent(UpdateCurrencyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

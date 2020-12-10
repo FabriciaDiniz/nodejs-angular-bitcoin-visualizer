@@ -1,0 +1,28 @@
+<div>
+	<div>
+		<button (click)="goToHome()">VOLTAR</button>
+	</div>
+	<div class="d-flex justify-content-center">
+		<form class="d-flex flex-column">
+			<label for="moeda">Moeda</label>
+			<select
+				name="moeda"
+				id="moeda"
+				[(ngModel)]="selectedOption"
+				class="form-item__width"
+			>
+				<option value="BRL" selected="selected">BRL</option>
+				<option value="CAD">CAD</option>
+				<option value="EUR">EUR</option>
+			</select>
+			<div *ngIf="currentValues">
+				<strong>Valor atual:</strong> {{ currentValues[selectedOption] | currency: selectedOption }}
+			</div>
+			<label for="valor">Novo valor</label>
+			<input name="valor" id="valor" type="number" class="form-item__width">
+			<button	type="submit" class="form-item__width" (click)="updateCurrency()">
+				ATUALIZAR
+			</button>
+		</form>
+	</div>
+</div>
