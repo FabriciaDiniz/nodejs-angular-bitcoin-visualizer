@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../login/login.service';
 
-import { Currencies } from '../models/currencies.model';
-import { RouterService } from '../services/router.service';
+import { Currencies } from '../../models/currencies.model';
+import { RouterService } from '../../services/router.service';
 import { UpdateCurrencyService } from './update-currency.service';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-update-currency',
@@ -13,8 +14,7 @@ import { UpdateCurrencyService } from './update-currency.service';
 export class UpdateCurrencyComponent implements OnInit {
 
   currentValues: Currencies;
-  selectedOption = 'BRL';
-  updatedValue: number;
+  updateForm: FormGroup;
 
   constructor(
     private updateCurrencyService: UpdateCurrencyService,
@@ -28,16 +28,21 @@ export class UpdateCurrencyComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.updateForm = new FormGroup({
+      currency: new FormControl('BRL'),
+      updatedValue: new FormControl()
+    });
   }
 
   public updateCurrency(): void {
 
     const token = this.loginService.getUserToken();
+    const currency = this.updateForm.get('currency').value;
+    const value = this.updateForm.get('updatedValue').value;
 
     if (token) {
       this.updateCurrencyService.updateCurrency(token, {
-        currency: this.selectedOption,
-        value: this.updatedValue,
+        currency, value
       })
         .subscribe(() => {
           this.routerService.redirectToHome();
@@ -49,5 +54,13 @@ export class UpdateCurrencyComponent implements OnInit {
 
   public goToHome(): void {
     this.routerService.redirectToHome();
+  }
+
+  public getFormCurrencyValue(): string {
+    return this.updateForm.get('currency').value;
+  }
+
+  public getFormUpdatedValueValue(): string {
+    return this.updateForm.get('updatedValue').value;
   }
 }

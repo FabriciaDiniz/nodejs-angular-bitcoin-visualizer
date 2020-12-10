@@ -14,8 +14,8 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class CurrencyDisplayComponent implements OnInit {
 
-  @Input() currency: string = '';
-  @Input() value: number = 0;
+  @Input() currency = '';
+  @Input() value = 0;
 
   ngOnInit(): void {
   }
