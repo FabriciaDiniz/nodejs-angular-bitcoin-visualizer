@@ -10,6 +10,11 @@ const currencies = {
   EUR: 'Euro',
 };
 
+function getFileContent(filePath) {
+  const fileContent = fs.readFileSync(filePath);
+  return JSON.parse(fileContent);
+}
+
 function calculateRate(USDRate, currencyRate) {
   return USDRate * currencyRate;
 }
@@ -67,12 +72,11 @@ const getQuotation = async (req, res) => {
 const updateRates = (req, res) => {
   if (res.finished) return;
 
-  const fileContent = fs.readFileSync(currenciesJsonPath);
-  const content = JSON.parse(fileContent);
+  const fileContent = getFileContent(currenciesJsonPath);
 
-  content[req.body.currency] = req.body.value;
+  fileContent[req.body.currency] = req.body.value;
 
-  fs.writeFile(currenciesJsonPath, JSON.stringify(content), (err, data) => {
+  fs.writeFile(currenciesJsonPath, JSON.stringify(fileContent), (err, data) => {
     if (err) {
       res.status(400).send({
         message: `Não foi possível alterar o valor de ${req.body.currency}`,
@@ -85,7 +89,13 @@ const updateRates = (req, res) => {
   });
 };
 
+const getCurrentRates = (req, res) => {
+  const fileContent = getFileContent(currenciesJsonPath);
+  res.status(200).send(fileContent);
+};
+
 module.exports = {
   getQuotation,
   updateRates,
+  getCurrentRates,
 };
