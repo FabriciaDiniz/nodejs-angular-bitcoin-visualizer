@@ -14,6 +14,7 @@ import { UpdateCurrencyService } from './components/update-currency/update-curre
 import { RouterService } from './services/router.service';
 import { LoginService } from './components/login/login.service';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { AuthGuard } from './auth.guard';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     AppRoutingModule,
   ],
   providers: [
+    AuthGuard,
     RouterService,
     LoginService,
     HomeService,
