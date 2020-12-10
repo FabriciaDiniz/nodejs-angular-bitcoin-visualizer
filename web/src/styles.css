@@ -1,0 +1,16 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+* {
+	font-size: 18px;
+	font-family: 'Roboto', sans-serif;
+}
+
+button {
+	background-color: #C4C4C4;
+	border: 0px;
+	font-weight: 400;
+	line-height: 23px;
+	min-width: 70px;
+	padding: 5px;
+}
