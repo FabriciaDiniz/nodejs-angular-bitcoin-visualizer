@@ -7,7 +7,7 @@ const login = (req, res, next) => {
     password: 'required|digits:6',
   };
 
-  validator(req.body, validationRuleLogin, {}, (err, status) => {
+  validator(req.body, validationRuleLogin, {}, (err) => {
     if (err) {
       res.status(400).send({
         message: 'Campos inválidos',
@@ -47,14 +47,14 @@ const checkParams = (req, res, next) => {
 
   let error = false;
 
-  validator(req.body, validationRuleCurr, {}, (err, status) => {
+  validator(req.body, validationRuleCurr, {}, (err) => {
     if (err) {
       error = err;
       res.status(400).send({ message: 'Moeda inválida' });
     }
   });
   if (!error) {
-    validator(req.body, validationRuleValue, {}, (err, status) => {
+    validator(req.body, validationRuleValue, {}, (err) => {
       if (err) {
         res.status(400).send({ message: 'Valor inválido' });
       } else {
