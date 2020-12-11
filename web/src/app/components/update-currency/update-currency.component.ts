@@ -41,7 +41,7 @@ export class UpdateCurrencyComponent implements OnInit {
 
     const token = this.loginService.getUserToken();
     const currency = this.currency.value;
-    const value = this.updatedValue.value;
+    const value = parseFloat(this.updatedValue.value).toFixed(3);
 
     if (token) {
       this.updateCurrencyService.updateCurrency(token, {
