@@ -1,9 +1,29 @@
 <div class="d-flex align-items-center">
-	<form [formGroup]="loginForm" class="d-flex flex-column">
+	<form [formGroup]="loginForm" class="d-flex flex-column form__width">
 		<label for="email">Email</label>
-		<input formControlName="email" type="text" name="email">
+		<input formControlName="email" type="text" id="email" placeholder="yourEmail@mail.com">
 		<label for="password">Senha</label>
-		<input formControlName="password" type="password" name="password">
-		<button type="submit" class="mt-4" (click)="send()">ENTRAR</button>
+		<input formControlName="password" type="password" id="password">
+		<div *ngIf="showErrors" class="alert alert-danger mt-3">
+			<div *ngIf="emailTouchedAndInvalid">
+				<div *ngIf="email.errors.required">
+					Email é obrigatório.
+				</div>
+				<div *ngIf="email.errors.email">
+					Email não está no formato correto.
+				</div>
+			</div>
+			<div *ngIf="passwordTouchedAndInvalid">
+				Senha é obrigatória e deve conter 6 números.
+			</div>
+		</div>
+		<button
+			type="submit"
+			class="mt-4"
+			(click)="send()"
+			[disabled]="loginForm.invalid"
+		>
+			ENTRAR
+		</button>
 	</form>
 </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { RouterService } from '../../services/router.service';
 import { LoginService } from './login.service';
@@ -20,14 +20,19 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
-      email: new FormControl(),
-      password: new FormControl(),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(6),
+        Validators.maxLength(6),
+        Validators.pattern(/\d+/g),
+      ]),
     });
   }
 
   public send(): void {
-    const email = this.loginForm.get('email').value;
-    const password = this.loginForm.get('password').value;
+    const email = this.email.value;
+    const password = this.password.value;
 
     this.loginService.login({ email, password })
       .subscribe(({ token }) => {
@@ -36,4 +41,23 @@ export class LoginComponent implements OnInit {
       });
   }
 
+  get email(): AbstractControl {
+    return this.loginForm.get('email');
+  }
+
+  get password(): AbstractControl {
+    return this.loginForm.get('password');
+  }
+
+  get showErrors(): boolean {
+    return this.loginForm.invalid && this.loginForm.touched;
+  }
+
+  get emailTouchedAndInvalid(): boolean {
+    return this.email.invalid && this.email.touched;
+  }
+
+  get passwordTouchedAndInvalid(): boolean {
+    return this.password.invalid && this.password.touched;
+  }
 }
