@@ -30,7 +30,7 @@ export class UpdateCurrencyComponent implements OnInit {
   ngOnInit(): void {
     this.updateForm = new FormGroup({
       currency: new FormControl('BRL'),
-      updatedValue: new FormControl(1, [
+      updatedValue: new FormControl(null, [
         Validators.required,
         Validators.min(0.1),
       ])
@@ -65,5 +65,9 @@ export class UpdateCurrencyComponent implements OnInit {
 
   get updatedValue(): AbstractControl {
     return this.updateForm.get('updatedValue');
+  }
+
+  get isUpdatedValueTouchedAndInvalid(): boolean {
+    return this.updatedValue.invalid && this.updatedValue.touched;
   }
 }

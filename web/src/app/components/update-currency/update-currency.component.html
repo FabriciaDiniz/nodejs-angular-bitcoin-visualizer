@@ -30,7 +30,7 @@
 				formControlName="updatedValue"
 				required
 			>
-			<div *ngIf="updatedValue.invalid" class="alert alert-danger my-3">
+			<div *ngIf="isUpdatedValueTouchedAndInvalid" class="alert alert-danger my-3">
 				<div *ngIf="updatedValue.errors.required">
 					Novo valor é obrigatório.
 				</div>
