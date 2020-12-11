@@ -22,7 +22,7 @@ function calculateRate(USDRate, currencyRate) {
 function createObj(USDObj, callback) {
   fs.readFile(currenciesJsonPath, (err, data) => {
     const dataObj = JSON.parse(data);
-    const currencyKeys = currencies.keys();
+    const currencyKeys = Object.keys(currencies);
 
     let currenciesObj = {};
 
