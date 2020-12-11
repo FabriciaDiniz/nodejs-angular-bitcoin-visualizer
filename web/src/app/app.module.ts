@@ -15,7 +15,6 @@ import { RouterService } from './services/router.service';
 import { LoginService } from './components/login/login.service';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { AuthGuard } from './auth.guard';
-
 @NgModule({
   declarations: [
     AppComponent,

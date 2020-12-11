@@ -3,17 +3,18 @@ import { HttpClient } from '@angular/common/http';
 
 import { CoinDeskResponse } from '../../models/rates.model';
 import { Observable } from 'rxjs';
+import { BACKEND_URL } from '../../../config/base-url.json';
 
 @Injectable()
 export class HomeService {
 
-  backendUrl = 'http://localhost:3001/api/crypto/btc';
+  backendUrl: string = BACKEND_URL;
 
   constructor(
     private httpClient: HttpClient,
   ) {}
 
   public getRates(): Observable<CoinDeskResponse> {
-    return this.httpClient.get(this.backendUrl) as Observable<CoinDeskResponse>;
+    return this.httpClient.get(`${this.backendUrl}/crypto/btc`) as Observable<CoinDeskResponse>;
   }
 }
