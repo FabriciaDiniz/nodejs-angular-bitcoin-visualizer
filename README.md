@@ -3,13 +3,11 @@
 Projeto criado para o teste técnico da Trybe.
 O projeto foi desenvolvido em Node JS e Angular.
 
-## Instruções para rodar o projeto
+## Instruções para executar o projeto
  - Clonar o projeto
- - (opcional) Criar um arquivo .env seguindo o padrão de *.env.example* e especificar uma porta para o servidor rodar
-	- a porta padrão é a 3001
- - Rodar o comando _$ npm i_ tanto na pasta api quanto na pasta web
- - Subir tanto o front quanto o back e acessar a aplicação
-	- *$ ng s* no front e *$ npm start* no back.
+ - (opcional) Criar um arquivo `api/.env` seguindo o padrão de `api/.env.example` e especificar uma porta para o servidor rodar (a porta padrão é a 3001)
+ - Para iniciar o front-end, executar o comando `npm i`, seguido do comando `ng s` na pasta `web/`
+ - Para iniciar o back-end, executar o comando `npm i`, seguido do comando `npm start` na pasta `api/`
 
 ## Considerações
  - As validações foram feitas no frontend e no backend, as de backend acabaram ficando redundantes, mas são requerimentos do teste
