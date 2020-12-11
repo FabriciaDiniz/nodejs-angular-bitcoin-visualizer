@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,7 +14,8 @@ import { UpdateCurrencyService } from './components/update-currency/update-curre
 import { RouterService } from './services/router.service';
 import { LoginService } from './components/login/login.service';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from './helpers/auth.guard';
+import { HttpErrorInterceptor } from './helpers/http-error.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,6 +33,11 @@ import { AuthGuard } from './auth.guard';
     AppRoutingModule,
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi: true
+    },
     AuthGuard,
     RouterService,
     LoginService,

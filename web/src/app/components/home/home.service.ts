@@ -15,6 +15,6 @@ export class HomeService {
   ) {}
 
   public getRates(): Observable<CoinDeskResponse> {
-    return this.httpClient.get(`${this.backendUrl}/crypto/btc`) as Observable<CoinDeskResponse>;
+    return this.httpClient.get<CoinDeskResponse>(`${this.backendUrl}/crypto/btc`);
   }
 }

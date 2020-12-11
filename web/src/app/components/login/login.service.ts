@@ -14,7 +14,7 @@ export class LoginService {
   ) {}
 
   public login(data): Observable<{ token: string}> {
-    return this.httpClient.post(`${this.backendUrl}/login`, data) as Observable<{ token: string}>;
+    return this.httpClient.post<{ token: string}>(`${this.backendUrl}/login`, data);
   }
 
   public getUserToken(): string {

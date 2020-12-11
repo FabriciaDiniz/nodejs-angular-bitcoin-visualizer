@@ -14,7 +14,7 @@ export class UpdateCurrencyService {
   ) {}
 
   public getCurrentValues(): Observable<Currencies> {
-    return this.httpClient.get(`${this.backendUrl}/crypto/current`) as Observable<Currencies>;
+    return this.httpClient.get<Currencies>(`${this.backendUrl}/crypto/current`);
   }
 
   public updateCurrency(token, loginInfo): Observable<object> {
