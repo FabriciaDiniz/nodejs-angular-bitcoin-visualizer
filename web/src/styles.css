@@ -18,3 +18,7 @@ button {
 label {
 	padding-top: 5px;
 }
+
+.primary-button {
+	background-color: #5FE122;
+}
