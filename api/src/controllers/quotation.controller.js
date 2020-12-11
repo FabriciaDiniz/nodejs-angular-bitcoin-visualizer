@@ -22,22 +22,24 @@ function calculateRate(USDRate, currencyRate) {
 function createObj(USDObj, callback) {
   fs.readFile(currenciesJsonPath, (err, data) => {
     const dataObj = JSON.parse(data);
+    const currencyKeys = currencies.keys();
 
     let currenciesObj = {};
 
-    for (const currency in currencies) {
-      const rate_float = calculateRate(USDObj.rate_float, dataObj[currency]);
+    currencyKeys.forEach((currency) => {
+      const rateFloat = calculateRate(USDObj.rate_float, dataObj[currency]);
 
       currenciesObj = {
         ...currenciesObj,
         [currency]: {
           code: currency,
-          rate: rate_float.toString(),
+          rate: rateFloat.toString(),
           description: currencies[currency],
-          rate_float: rate_float,
+          rate_float: rateFloat,
         },
       };
-    }
+    });
+
     callback(currenciesObj);
   });
 }
@@ -50,7 +52,7 @@ const getQuotation = async (req, res) => {
     .then((response) => {
       coinDeskResponse = response.data;
     })
-    .catch((error) => {
+    .catch(() => {
       res
         .status(400)
         .send({
@@ -76,7 +78,7 @@ const updateRates = (req, res) => {
 
   fileContent[req.body.currency] = req.body.value.toString();
 
-  fs.writeFile(currenciesJsonPath, JSON.stringify(fileContent), (err, data) => {
+  fs.writeFile(currenciesJsonPath, JSON.stringify(fileContent), (err) => {
     if (err) {
       res.status(400).send({
         message: `Não foi possível alterar o valor de ${req.body.currency}`,
