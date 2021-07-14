@@ -1,6 +1,5 @@
 # nodejs-react-bitcoin-visualizer
 
-Projeto criado para o teste técnico da Trybe.
 O projeto foi desenvolvido em Node JS e Angular.
 
 ## Instruções para executar o projeto
